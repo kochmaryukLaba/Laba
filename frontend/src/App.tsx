@@ -1,6 +1,6 @@
 import './App.css'
 
-const appTitle: string = 'Task Tracker'
+const appTitle: string ='ДневничЁк' 
 
 export default function App() {
   return (
