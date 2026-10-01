@@ -4,3 +4,12 @@
   padding: 32px 20px;
 }
 .app section { margin-top: 32px; }
+nav { display: flex; flex-wrap: wrap; gap: 16px; }
+nav a.active { font-weight: bold; }
+.task-list { display: grid; gap: 16px; margin-top: 24px; }
+.task-card { border: 1px solid #ccc; padding: 16px; }
+.task-card h2 { margin-top: 0; }
+.task-card { overflow-wrap: anywhere; }
+@media (min-width: 760px) {
+ .task-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
