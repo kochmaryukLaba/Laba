@@ -1,7 +1,15 @@
 import { Link } from 'react-router'
 import { TaskCard } from '../components/TaskCard'
-import { tasks } from '../data/tasks'
-export function TasksPage() {
+import type { Task, TaskStatus} from '../types/task'
+import { useState } from 'react'
+type TasksPageProps = { tasks: Task[] }
+
+export function TasksPage({ tasks }: TasksPageProps) {
+ const [status, setStatus] = useState<TaskStatus | 'all'>('all')
+
+ const visibleTasks = tasks.filter((task) =>
+ status === 'all' || task.status === status
+ )
  return (
  <section>
  <h1>Мои задачи</h1>
@@ -10,7 +18,19 @@ export function TasksPage() {
  <p>Задач пока нет.</p>
  ) : (
  <div className="task-list">
- {tasks.map((task) => (
+    <select value={status} onChange={(e) => {
+ const value = e.target.value
+ if (value === 'all' || value === 'В планах' || value === 'В процессе' || value === 'Завершено') {
+ setStatus(value)
+ }
+}}>
+ <option value="all">Все</option>
+ <option value="В планах">В планах</option>
+ <option value="В процессе">В процессе</option>
+ <option value="Завершено">Завершено</option>
+</select>
+<button type="button" onClick={() => setStatus('all')}>Сбросить фильтр</button>
+ {visibleTasks.map((task) => (
  <TaskCard key={task.id} task={task} />
  ))}
  </div>
