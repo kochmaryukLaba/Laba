@@ -4,7 +4,7 @@ export function NewTaskPage() {
   return (
     <section>
       <h1>Создание задачи</h1>
-      <p>йоу.</p>
+      <p>йоу, возвращайся позже</p>
       <Link to="/tasks">К списку задач</Link>
     </section>
   )
