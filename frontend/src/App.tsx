@@ -29,7 +29,7 @@ function deleteTask(id: string): void {
   setTasks((current) => current.filter((task) => task.id !== id))
 }
  return (
- <Routes>ы
+ <Routes>
  <Route element={<AppLayout />}>
  <Route path="tasks" element={<TasksPage tasks={tasks} />} />
 <Route path="tasks/new" element={<NewTaskPage onCreate={createTask} />} />

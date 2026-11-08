@@ -2,10 +2,15 @@ import { Link } from 'react-router'
 import { TaskCard } from '../components/TaskCard'
 import type { Task, TaskStatus} from '../types/task'
 import { useState } from 'react'
+import { useTags } from '../hooks/useTags'
 type TasksPageProps = { tasks: Task[] }
 
 export function TasksPage({ tasks }: TasksPageProps) {
  const [status, setStatus] = useState<TaskStatus | 'all'>('all')
+ const { load } = useTags()
+ const tagNames = new Map(
+ load.status === 'success' ? load.data.map((tag) => [tag.id, tag.name]) : []
+ )
 
  const visibleTasks = tasks.filter((task) =>
  status === 'all' || task.status === status
@@ -31,7 +36,7 @@ export function TasksPage({ tasks }: TasksPageProps) {
 </select>
 <button type="button" onClick={() => setStatus('all')}>Сбросить фильтр</button>
  {visibleTasks.map((task) => (
- <TaskCard key={task.id} task={task} />
+ <TaskCard key={task.id} task={task} tagName={tagNames.get(task.tag)} />
  ))}
  </div>
  )}

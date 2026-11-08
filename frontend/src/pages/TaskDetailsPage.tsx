@@ -1,5 +1,6 @@
 import { Link, useNavigate, useParams } from 'react-router'
 import type { Task } from '../types/task'
+import { useTags } from '../hooks/useTags'
 type TaskDetailsPageProps = {
   tasks: Task[]
   onDelete: (id: string) => void
@@ -9,6 +10,7 @@ export function TaskDetailsPage({ tasks, onDelete }: TaskDetailsPageProps) {
 const { id } = useParams()
  const task = tasks.find((item) => item.id === id)
  const navigate = useNavigate()
+ const { load } = useTags()
  if (!task) {
  return (
  <section>
@@ -24,6 +26,9 @@ const { id } = useParams()
  <p>Срок: {task.dueDate}</p>
  <p>Статус: {task.status}</p>
  <p>Приоритет: {task.priority}</p>
+ <p>Тег: {(load.status === 'success'
+ ? load.data.find((tag) => tag.id === task.tag)?.name
+ : undefined) ?? task.tag}</p>
  <Link to="/tasks">К списку задач</Link>
  <Link to={`/tasks/${task.id}/edit`}>Редактировать</Link>
   <button type="button" onClick={() => {
