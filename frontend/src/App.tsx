@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router'
+import { Navigate, Route, Routes } from 'react-router'
 import { AppLayout } from './app/AppLayout'
 import { TasksPage } from './pages/TasksPage'
 import { TaskDetailsPage } from './pages/TaskDetailsPage'
@@ -31,6 +31,7 @@ function deleteTask(id: string): void {
  return (
  <Routes>
  <Route element={<AppLayout />}>
+ <Route index element={<Navigate to="/tasks" replace />} />
  <Route path="tasks" element={<TasksPage tasks={tasks} />} />
 <Route path="tasks/new" element={<NewTaskPage onCreate={createTask} />} />
 <Route path="tasks/:id" element={<TaskDetailsPage tasks={tasks} onDelete={deleteTask} />} />

@@ -33,6 +33,10 @@ export function TaskForm(props: TaskFormProps) {
       setError('Укажите срок задачи.')
       return
     }
+    if (draft.status === 'Завершено' && draft.description.trim() === '') {
+      setError('Для завершённой задачи заполните описание результата.')
+      return
+    }
     setError('')
     props.onSave({ ...draft, title })
   }

@@ -35,6 +35,7 @@ export function TasksPage({ tasks }: TasksPageProps) {
  <option value="Завершено">Завершено</option>
 </select>
 <button type="button" onClick={() => setStatus('all')}>Сбросить фильтр</button>
+ {visibleTasks.length === 0 && <p>Нет задач с выбранным статусом.</p>}
  {visibleTasks.map((task) => (
  <TaskCard key={task.id} task={task} tagName={tagNames.get(task.tag)} />
  ))}
